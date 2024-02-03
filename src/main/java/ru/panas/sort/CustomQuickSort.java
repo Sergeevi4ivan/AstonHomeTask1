@@ -22,8 +22,7 @@ public class CustomQuickSort<T extends Comparable<T>> implements CustomSort<T>{
         quickSort(array, 0, length - 1);
     }
 
-    private MyArrayList<T> quickSort(MyArrayList<T> array, int from, int to) {
-
+    private void quickSort(MyArrayList<T> array, int from, int to) {
         if (from < to) {
             int divideIndex = partition(array, from, to);
 
@@ -31,7 +30,6 @@ public class CustomQuickSort<T extends Comparable<T>> implements CustomSort<T>{
 
             quickSort(array, divideIndex, to);
         }
-        return null;
     }
 
     private int partition(MyArrayList<T> array, int from, int to) {

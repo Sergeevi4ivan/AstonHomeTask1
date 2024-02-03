@@ -15,5 +15,5 @@ public interface CustomSort<T extends Comparable<T>> {
      * @param array custom array list for sorting
      * @param length size of array
      */
-    public void sort(MyArrayList<T> array, int length);
+     void sort(MyArrayList<T> array, int length);
 }

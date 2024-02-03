@@ -6,6 +6,7 @@ import org.junit.Test;
 import ru.panas.customList.MyArrayList;
 import static org.assertj.core.api.Assertions.assertThat;
 
+// тесты хорошие
 public class CustomQuickSortTest extends TestCase {
 
     private CustomQuickSort<String> quickSort = new CustomQuickSort<>();

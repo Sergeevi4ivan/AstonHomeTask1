@@ -12,6 +12,8 @@ package ru.panas.customList;
 
 public class MyArrayList<T extends Comparable<T>> implements CustomList<T> {
 
+    public static final String CAPACITY_ERR_MSG = "Size of array must be a positive number";
+    public static final String INDEX_ERR_MSG = "Index does not exist in the array";
     /**
      * Array of elements
      */
@@ -45,7 +47,7 @@ public class MyArrayList<T extends Comparable<T>> implements CustomList<T> {
      */
     public MyArrayList(int capacity) {
         if (capacity < 0) {
-            throw new IllegalArgumentException("Size of array must be a positive number" );
+            throw new IllegalArgumentException(CAPACITY_ERR_MSG); // выносим сообщения в константы
         }
         array = new Object[capacity];
     }
@@ -65,7 +67,7 @@ public class MyArrayList<T extends Comparable<T>> implements CustomList<T> {
     }
 
     /**
-     * Add new element to array by index. If size is too small, then it grow
+     * Add new element to array by index. If size is too small, then it grow А зачем тут дублировать доку? есть же все в интерфейсе
      * @param value is the element for add to array
      * @param index is the index for add element to array
      * @return if the element added to array method return true, else false
@@ -122,14 +124,12 @@ public class MyArrayList<T extends Comparable<T>> implements CustomList<T> {
      * @return index of value from array. If value is not exist, then method return -1
      */
     public int indexOf(T value) {
-        int result = -1;
         for (int i = 0; i < index; i++) {
-            if (array[i].equals(value)) {
-                result = i;
-                break;
+            if (array[i].equals(value)) { // если по индексу в массиве лежит null - NPE
+                return i;
             }
         }
-        return result;
+        return -1;
     }
 
     /**
@@ -155,9 +155,8 @@ public class MyArrayList<T extends Comparable<T>> implements CustomList<T> {
     public boolean remove(T value) {
         Object[] tempArray = this.array;
         for (int i = 0; i < size; i++) {
-            if (tempArray[i].equals(value)) {
-                remove(i);
-                return true;
+            if (tempArray[i].equals(value)) { // тоже может быть NPE
+                return remove(i);
             }
         }
         return false;
@@ -168,11 +167,8 @@ public class MyArrayList<T extends Comparable<T>> implements CustomList<T> {
      */
     @Override
     public void clear() {
-
-        for (int i = 0; i < size; i++) {
-            array[i] = null;
-        }
-        this.size = 0;
+        array = new Object[array.length];
+        size = 0;
     }
 
     /**
@@ -191,7 +187,7 @@ public class MyArrayList<T extends Comparable<T>> implements CustomList<T> {
      */
     private void checkIndex(int index) {
         if (index < 0 || index >= this.index) {
-            throw new IllegalArgumentException("Index does not exist in the array");
+            throw new IllegalArgumentException(INDEX_ERR_MSG);
         }
 
     }

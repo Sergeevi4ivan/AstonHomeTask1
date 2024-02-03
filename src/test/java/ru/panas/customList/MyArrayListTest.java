@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class MyArrayListTest {
 
-    private MyArrayList<String> actualArrayList = new MyArrayList<>();
+    private final MyArrayList<String> actualArrayList = new MyArrayList<>();
 
     @Before
     public void setUp() {
